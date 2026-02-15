@@ -8,6 +8,8 @@ interface Props {
   currentView: View;
 }
 
+import logo from '../assets/logo.png';
+
 const Navbar: React.FC<Props> = ({ onNavigate, currentView }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -39,28 +41,24 @@ const Navbar: React.FC<Props> = ({ onNavigate, currentView }) => {
   };
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-4 py-4 ${
-        isScrolled ? 'md:py-4' : 'md:py-8'
-      }`}
+    <nav
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-4 py-4 ${isScrolled ? 'md:py-4' : 'md:py-8'
+        }`}
       aria-label="Main Navigation"
     >
-      <div className={`max-w-7xl mx-auto flex items-center justify-between px-6 py-4 rounded-[1.5rem] transition-all duration-500 ${
-        isScrolled || currentView !== 'home' ? 'bg-white/70 backdrop-blur-xl shadow-[0_8px_32px_-16px_rgba(0,0,0,0.1)] border border-white/50' : 'bg-transparent'
-      }`}>
+      <div className={`max-w-7xl mx-auto flex items-center justify-between px-6 py-4 rounded-[1.5rem] transition-all duration-500 ${isScrolled || currentView !== 'home' ? 'bg-white/70 backdrop-blur-xl shadow-[0_8px_32px_-16px_rgba(0,0,0,0.1)] border border-white/50' : 'bg-transparent'
+        }`}>
         {/* Logo */}
         <button onClick={() => onNavigate('home')} className="flex items-center space-x-3 group">
-          <div className="w-10 h-10 bg-indigo-600 rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform shadow-lg shadow-indigo-100">
-            <div className="w-5 h-1.5 bg-white rounded-full"></div>
-          </div>
+          <img src={logo} alt="HyperSonic Logo" className="h-10 w-auto object-contain transition-transform group-hover:scale-105" />
           <span className="text-2xl font-extrabold tracking-tight text-slate-900">HyperSonic</span>
         </button>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-10">
           {navItems.map((item) => (
-            <a 
-              key={item.label} 
+            <a
+              key={item.label}
               href={item.href}
               onClick={(e) => handleLinkClick(e, item.href)}
               className="text-sm font-bold text-slate-500 hover:text-indigo-600 transition-colors relative group"
@@ -74,17 +72,17 @@ const Navbar: React.FC<Props> = ({ onNavigate, currentView }) => {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-6">
-           <button onClick={() => onNavigate('signin')} className={`text-sm font-bold transition-colors ${currentView === 'signin' ? 'text-indigo-600' : 'text-slate-900 hover:text-indigo-600'}`}>Sign In</button>
-           <button 
-             onClick={() => onNavigate('booking')}
-             className="bg-slate-900 text-white px-8 py-3 rounded-xl text-sm font-bold transition-all shadow-xl hover:shadow-2xl hover:bg-slate-800 hover:scale-[1.02] active:scale-95"
-           >
-             Book a strategy call
-           </button>
+          <button onClick={() => onNavigate('signin')} className={`text-sm font-bold transition-colors ${currentView === 'signin' ? 'text-indigo-600' : 'text-slate-900 hover:text-indigo-600'}`}>Sign In</button>
+          <button
+            onClick={() => onNavigate('booking')}
+            className="bg-slate-900 text-white px-8 py-3 rounded-xl text-sm font-bold transition-all shadow-xl hover:shadow-2xl hover:bg-slate-800 hover:scale-[1.02] active:scale-95"
+          >
+            Book a strategy call
+          </button>
         </div>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           className="md:hidden p-2 text-slate-900 focus:outline-none"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-expanded={mobileMenuOpen}
@@ -107,8 +105,8 @@ const Navbar: React.FC<Props> = ({ onNavigate, currentView }) => {
           >
             <div className="flex flex-col space-y-6">
               {navItems.map((item) => (
-                <a 
-                  key={item.label} 
+                <a
+                  key={item.label}
                   href={item.href}
                   className="text-2xl font-bold text-slate-900 hover:text-indigo-600 transition-colors"
                   onClick={(e) => {
